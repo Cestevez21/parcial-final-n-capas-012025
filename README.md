@@ -3,8 +3,9 @@
 Este repositorio contiene un proyecto para evaluar y practicar los conceptos de seguridad en aplicaciones Spring Boot usando JWT, roles y Docker.
 
 ### Estudiantes
-- **Nombre del estudiante 1**: Carlos Francisco Estevez Lemus - 00120218
-- **Nombre del estudiante 2**: Victor Andres Marquez Aguilar - 00046921
+=======
+- **Nombre del estudiante 1**: Victor Andres Marquez Aguilar - 00046921
+- **Nombre del estudiante 2**: Carlos Francisco Estevez Lemus - 00120218
 - Sección: 01
 ---
 
