@@ -5,7 +5,7 @@ Este repositorio contiene un proyecto para evaluar y practicar los conceptos de 
 ### Estudiantes
 - **Nombre del estudiante 1**: Victor Andres Marquez Aguilar - 00046921
 - **Nombre del estudiante 2**: [Tu nombre aquí] - [Carnet aquí]
-- Sección: [Tu sección aquí]
+- Sección: 01
 ---
 
 ## Sistema de Soporte Técnico
