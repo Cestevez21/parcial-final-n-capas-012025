@@ -2,12 +2,11 @@ package com.uca.parcialfinalncapas.controller;
 
 import com.uca.parcialfinalncapas.dto.request.AuthRequest;
 import com.uca.parcialfinalncapas.dto.response.AuthResponse;
+import com.uca.parcialfinalncapas.entities.User;
 import com.uca.parcialfinalncapas.repository.UserRepository;
 import com.uca.parcialfinalncapas.utils.JwtUtil;
-import com.uca.parcialfinalncapas.entities.User;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
-import org.springframework.http.HttpStatus;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.Authentication;
@@ -26,19 +25,18 @@ public class AuthController {
     @PostMapping("/login")
     public ResponseEntity<?> login(@RequestBody AuthRequest authRequest) {
         try {
-            Authentication auth = authenticationManager.authenticate(
+            Authentication authentication = authenticationManager.authenticate(
                     new UsernamePasswordAuthenticationToken(
-                            authRequest.getCorreo(), authRequest.getPassword()
+                            authRequest.getCorreo(),
+                            authRequest.getPassword()
                     )
             );
 
-            User user = userRepository.findByCorreo(authRequest.getCorreo())
-                    .orElseThrow(() -> new RuntimeException("Usuario no encontrado"));
-
+            User user = userRepository.findByCorreo(authRequest.getCorreo()).orElseThrow();
             String token = jwtUtil.generateToken(user);
             return ResponseEntity.ok(new AuthResponse(token));
         } catch (AuthenticationException e) {
-            return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body("Credenciales inválidas");
+            return ResponseEntity.status(403).body("Credenciales inválidas");
         }
     }
 }

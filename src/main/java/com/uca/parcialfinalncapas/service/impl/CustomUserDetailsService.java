@@ -3,10 +3,11 @@ package com.uca.parcialfinalncapas.service.impl;
 import com.uca.parcialfinalncapas.entities.User;
 import com.uca.parcialfinalncapas.repository.UserRepository;
 import lombok.RequiredArgsConstructor;
+import org.springframework.security.core.GrantedAuthority;
+import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
-import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.stereotype.Service;
 
 import java.util.Collections;
@@ -22,10 +23,12 @@ public class CustomUserDetailsService implements UserDetailsService {
         User user = userRepository.findByCorreo(correo)
                 .orElseThrow(() -> new UsernameNotFoundException("Usuario no encontrado"));
 
+        GrantedAuthority authority = new SimpleGrantedAuthority("ROLE_" + user.getNombreRol());
+
         return new org.springframework.security.core.userdetails.User(
                 user.getCorreo(),
                 user.getPassword(),
-                Collections.singletonList(new SimpleGrantedAuthority("ROLE_" + user.getNombreRol()))
+                Collections.singleton(authority)
         );
     }
 }
